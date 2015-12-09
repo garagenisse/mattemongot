@@ -1,6 +1,37 @@
 ﻿angular.module('mattemongot.services', ['ngStorage'])
 
-	// Service for settings
+// Service for math generator
+	.service('MathService', function () {
+
+		this.getQuiz = function (timesTable) {
+			
+			// Get random 0-10 * level
+			var r = Math.round(Math.random() * 10);
+			var quiz = r + " * " + timesTable;
+			console.log("New quiz: " + quiz);
+
+			var answers = [r * timesTable];
+			while (answers.length <= 2) {
+
+				var g = Math.round(Math.random() * 10) * timesTable;
+
+				if (false == _.contains(answers, g)) {
+					answers.push(g);
+				}
+			};
+
+			console.log("Answers: " + answers[0] + ", " + answers[1] + ", " + answers[2]);
+
+			answers = _.shuffle(answers);
+			console.log("Answers shuffled: " + answers[0] + ", " + answers[1] + ", " + answers[2]);
+				
+			var correctIndex = _.findIndex(answers, function(a) { return a == r*timesTable;});
+			
+			return { quizDisplay: quiz, answers: answers, correctIndex: correctIndex};
+		};
+	})
+
+// Service for settings
 	.service('SettingsService', function ($localStorage) {
 
 		this.updateFrom_1_0_0 = function (version) {

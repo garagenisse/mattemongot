@@ -1,5 +1,45 @@
-<ion-view view-title="Play">
-  <ion-content>
-	  <p>{{$storage.settings.levels[levelIndex].display}}</p>
-  </ion-content>
+<ion-view view-title="{{level.display}}">
+	<ion-content class="padding paperback">
+		<div class="card">
+			<div class="item item-divider">
+				<h2 style="text-align: center;">{{level.display}}</h2>
+			</div>
+			<div class="item item-text-wrap">
+				<div class="row">
+					<div class="col col-20 col-center">
+						<button ng-hide="isCorrect" class="button icon ion-thumbsdown button-assertive"></button>
+					</div>
+					<div class="col col-60 col-center">
+						<h1 style="font-size: 48px; text-align: center">{{quiz.quizDisplay}}</h1>
+					</div>
+					<div class="col col-20 col-center">
+						<button ng-show="isCorrect" class="button icon ion-thumbsup button-balanced"></button>
+					</div>
+				</div>
+			</div>
+			<div class="item item-divider">
+				<div class="row">
+					<div class="col col-10"></div>
+					<div class="col col-20"><img ng-show="userLevel.stars == 1" src="img/award-star-bronze-1-icon.png" /></div>
+					<div class="col col-10"></div>
+					<div class="col col-20"><img ng-show="userLevel.stars == 2" src="img/award-star-silver-3-icon.png"/></div>
+					<div class="col col-10"></div>
+					<div class="col col-20"><img ng-show="userLevel.stars == 3" src="img/award-star-gold-2-icon.png"/></div>
+					<div class="col col-10"></div>
+				</div>
+				<progress max="100" value="{{delta}}" class="html5"></progress>
+			</div>
+			<div class="item item-text-wrap">
+				<button ng-click="onClickAnswer(0)" class="button button-full button-positive">
+					{{quiz.answers[0]}}
+				</button>
+				<button ng-click="onClickAnswer(1)" class="button button-full button-positive">
+					{{quiz.answers[1]}}
+				</button>
+				<button ng-click="onClickAnswer(2)" class="button button-full button-positive">
+					{{quiz.answers[2]}}
+				</button>
+			</div>
+		</div>
+	</ion-content>
 </ion-view>

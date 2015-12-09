@@ -4,17 +4,17 @@ body {
 	font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
-input, button, select, textarea {
+input, button, select, textarea, h1, h2, h3, h4, h5, h6 {
 	font-family: "Comic Sans MS", cursive, sans-serif;
 }
-.paperback {
+/*.paperback {
 	background: url('../img/background.jpg') no-repeat center;
-}
+}*/
 
-.card {
+/*.card {
 	background-color: transparent;
 }
 
 .item {
 	background-color: transparent;
-}
+}*/
