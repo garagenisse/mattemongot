@@ -1,0 +1,22 @@
+<ion-view view-title="Dashboard">
+	<ion-content class="padding paperback">
+		<br />
+		<div class="list card">
+
+			<div class="item item-body">
+				<div class="row" ng-repeat="level in $storage.userSettings.levels track by $index">
+					<div class="col col-90">
+						<button class="button button-block button-positive" ng-click="selectLevel($index)">
+							{{$storage.settings.levels[$index].display}}
+						</button>
+					</div>
+					<div class="col col-15 col-center">
+						<img ng-show="level.stars == 1" src="img/award-star-bronze-1-icon.png" />
+						<img ng-show="level.stars == 2" src="img/award-star-silver-3-icon.png"/>
+						<img ng-show="level.stars == 3" src="img/award-star-gold-2-icon.png"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>
