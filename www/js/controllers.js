@@ -1,4 +1,4 @@
-angular.module('mattemongot.controllers', [])
+﻿angular.module('mattemongot.controllers', [])
 
 	.controller('DashCtrl', function ($scope, $localStorage, $location, $state) {
 
@@ -44,7 +44,7 @@ angular.module('mattemongot.controllers', [])
 			}
 			
 			// Check stats
-			if($scope.delta > 75 && $scope.userLevel.stars < 3) {
+			if($scope.delta > 70 && $scope.userLevel.stars < 3) {
 				$scope.userLevel.stars = 3;
 				console.log("Gold medal awarded");
 			}
@@ -52,7 +52,7 @@ angular.module('mattemongot.controllers', [])
 				$scope.userLevel.stars = 2;
 				console.log("Silver medal awarded");
 			}
-			if($scope.delta > 25 && $scope.userLevel.stars < 1) {
+			if($scope.delta > 30 && $scope.userLevel.stars < 1) {
 				$scope.userLevel.stars = 1;
 				console.log("Bronze medal awarded");
 			}
@@ -80,10 +80,32 @@ angular.module('mattemongot.controllers', [])
 		}
 	})
 
-	.controller('SettingsCtrl', function ($scope, $localStorage) {
+	.controller('SettingsCtrl', function ($scope, $rootScope, SettingsService, $ionicPopup, $localStorage) {
 
 		$scope.$storage = $localStorage;
-
 		$scope.$on('$ionicView.enter', function (e) {
 		});
-	});
+
+
+		$scope.reset = function () {
+
+			$localStorage.userSettings = SettingsService.getUserSettings();
+			$localStorage.settings = SettingsService.getSettings();
+			$localStorage.settings.version = $rootScope.version;
+			$localStorage.userSettings.version = $rootScope.version;
+		};
+
+		$scope.showConfirm = function () {
+			var confirmPopup = $ionicPopup.confirm({
+				title: 'Bekräfta återställning',
+				template: 'Är du säker på att du vill börja om?',
+				cancelText: 'Avbryt'
+			});
+			confirmPopup.then(function (res) {
+				if (res) {
+					$scope.reset();
+				} else {
+				}
+			});
+		};
+	})

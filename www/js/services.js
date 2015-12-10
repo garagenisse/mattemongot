@@ -7,7 +7,10 @@
 			
 			// Get random 0-10 * level
 			var r = Math.round(Math.random() * 10);
-			var quiz = r + " * " + timesTable;
+
+			// x * y || y * x
+			var quiz = (Math.random() < 0.5) ? r + " * " + timesTable : timesTable + " * " + r;
+
 			console.log("New quiz: " + quiz);
 
 			var answers = [r * timesTable];
@@ -74,9 +77,10 @@
 			return {
 				sound: true,
 				levels: [
-					{ level: 2, stars: 1, stats: [] },
-					{ level: 3, stars: 2, stats: [] },
-					{ level: 4, stars: 3, stats: [] },
+					{ level: 1, stars: 1, stats: [] },
+					{ level: 2, stars: 2, stats: [] },
+					{ level: 3, stars: 3, stats: [] },
+					{ level: 4, stars: 0, stats: [] },
 					{ level: 5, stars: 0, stats: [] },
 					{ level: 6, stars: 0, stats: [] },
 					{ level: 7, stars: 0, stats: [] },
@@ -90,15 +94,16 @@
 		this.getSettings = function () {
 			return {
 				levels: [
-					{ level: 2, display: '2. Tvåans tabell' },
-					{ level: 3, display: '3. Treans tabell' },
-					{ level: 4, display: '4. Fyrans tabell' },
-					{ level: 5, display: '5. Femmans tabell' },
-					{ level: 6, display: '6. Sexans tabell' },
-					{ level: 7, display: '7. Sjuans tabell' },
-					{ level: 8, display: '8. Åttans tabell' },
-					{ level: 9, display: '9. Nians tabell' },
-					{ level: 10, display: '10. Tians tabell' }
+					{ level: 1, display: 'Ettans tabell' },
+					{ level: 2, display: 'Tvåans tabell' },
+					{ level: 3, display: 'Treans tabell' },
+					{ level: 4, display: 'Fyrans tabell' },
+					{ level: 5, display: 'Femmans tabell' },
+					{ level: 6, display: 'Sexans tabell' },
+					{ level: 7, display: 'Sjuans tabell' },
+					{ level: 8, display: 'Åttans tabell' },
+					{ level: 9, display: 'Nians tabell' },
+					{ level: 10, display: 'Tians tabell' }
 				],
 			};
 		}

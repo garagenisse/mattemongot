@@ -1,4 +1,4 @@
-// Ionic Starter App
+ï»¿// Ionic Starter App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.services', 'ngStorage'])
 
-.run(function ($ionicPlatform, SettingsService, $localStorage) {
+.run(function ($ionicPlatform, SettingsService, $localStorage, $rootScope) {
 	$ionicPlatform.ready(function () {
 		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 		// for form inputs)
@@ -40,10 +40,13 @@ angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.
 
 		} else {
 
-			// Kör alltid med senaste settings i Chrome för jag får inte ut versionsnummret...
+			// KÃ¶r alltid med senaste settings i Chrome fÃ¶r jag fÃ¥r inte ut versionsnummret...
 			//alert("Reset settings");
 			$localStorage.userSettings = SettingsService.getUserSettings();
 			$localStorage.settings = SettingsService.getSettings();
+			$localStorage.settings.version = "0.0.1";
+			$localStorage.userSettings.version = "0.0.1";
+			$rootScope.version = "0.0.1";
 		}
 	});
 })

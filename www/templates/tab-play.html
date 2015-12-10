@@ -1,4 +1,4 @@
-<ion-view view-title="{{level.display}}">
+﻿<ion-view view-title="{{level.display}}">
 	<ion-content class="padding paperback">
 		<div class="card">
 			<div class="item item-divider">
@@ -20,12 +20,25 @@
 			<div class="item item-divider">
 				<div class="row">
 					<div class="col col-10"></div>
-					<div class="col col-20"><img ng-show="userLevel.stars == 1" src="img/award-star-bronze-1-icon.png" /></div>
 					<div class="col col-10"></div>
-					<div class="col col-20"><img ng-show="userLevel.stars == 2" src="img/award-star-silver-3-icon.png"/></div>
+					<div class="col col-10">
+						<img ng-show="userLevel.stars >= 1" src="img/award-star-bronze-1-icon.png" />
+						<img ng-show="userLevel.stars < 1" src="img/award-star-disabled.png" />
+					</div>
 					<div class="col col-10"></div>
-					<div class="col col-20"><img ng-show="userLevel.stars == 3" src="img/award-star-gold-2-icon.png"/></div>
+					<div class="col col-10">
+						<img ng-show="userLevel.stars >= 2" src="img/award-star-silver-3-icon.png"/>
+						<img ng-show="userLevel.stars < 2" src="img/award-star-disabled.png" />
+					</div>
 					<div class="col col-10"></div>
+					<div class="col col-10">
+						<img ng-show="userLevel.stars >= 3" src="img/award-star-gold-2-icon.png"/>
+						<img ng-show="userLevel.stars < 3" src="img/award-star-disabled.png" />
+					</div>
+					<div class="col col-10"></div>
+					<div class="col col-10"></div>
+					<div class="col col-10"></div>
+
 				</div>
 				<progress max="100" value="{{delta}}" class="html5"></progress>
 			</div>

@@ -1,4 +1,24 @@
-<ion-view view-title="Settings">
-  <ion-content>
-  </ion-content>
+﻿<ion-view view-title="Inställningar">
+	<ion-content>
+		<div class="card">
+
+			<!-- Reset -->
+			<div class="item item-avatar">
+				<img src="img/drawable-mdpi-icon.png">
+				<h2><strong>Mattemongot &copy;</strong></h2>
+				<p>Version: {{$root.version}}
+			</div>
+			<!-- Typsnitt -->
+			<div class="item list">
+				<!-- Reset -->
+				<li class="item">
+					<div class="row">
+						<div class="col text-center">
+							<button ng-click=showConfirm() class="button button-large button-outline icon ion-ios-trash button-assertive"> Nollställ</button>
+						</div>
+					</div>
+				</li>
+			</div>
+		</div>
+	</ion-content>
 </ion-view>
