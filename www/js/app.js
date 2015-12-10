@@ -5,9 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.services', 'ngStorage'])
+angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.services', 'ngStorage', 'ngCordova'])
 
-.run(function ($ionicPlatform, SettingsService, $localStorage, $rootScope) {
+.run(function ($ionicPlatform, SettingsService, $localStorage, $rootScope, $cordovaAppVersion) {
 	$ionicPlatform.ready(function () {
 		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 		// for form inputs)

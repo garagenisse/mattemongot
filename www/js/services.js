@@ -77,17 +77,27 @@
 			return {
 				sound: true,
 				levels: [
-					{ level: 1, stars: 1, stats: [] },
-					{ level: 2, stars: 2, stats: [] },
-					{ level: 3, stars: 3, stats: [] },
+					{ level: 1, stars: 0, stats: [] },
+					{ level: 2, stars: 0, stats: [] },
+					{ level: 3, stars: 0, stats: [] },
 					{ level: 4, stars: 0, stats: [] },
 					{ level: 5, stars: 0, stats: [] },
 					{ level: 6, stars: 0, stats: [] },
 					{ level: 7, stars: 0, stats: [] },
 					{ level: 8, stars: 0, stats: [] },
 					{ level: 9, stars: 0, stats: [] },
-					{ level: 10, stars: 0, stats: [] }
-				]
+					{ level: 10, stars: 0, stats: [] },
+					{ level: 11, stars: 0, stats: [] },
+					{ level: 12, stars: 0, stats: [] },
+					{ level: 13, stars: 0, stats: [] },
+					{ level: 14, stars: 0, stats: [] },
+					{ level: 15, stars: 0, stats: [] },
+					{ level: 16, stars: 0, stats: [] },
+					{ level: 17, stars: 0, stats: [] },
+					{ level: 18, stars: 0, stats: [] },
+					{ level: 19, stars: 0, stats: [] },
+					{ level: 20, stars: 0, stats: [] }
+			]
 			}
 		};
 
@@ -103,7 +113,17 @@
 					{ level: 7, display: 'Sjuans tabell' },
 					{ level: 8, display: 'Åttans tabell' },
 					{ level: 9, display: 'Nians tabell' },
-					{ level: 10, display: 'Tians tabell' }
+					{ level: 10, display: 'Tians tabell' },
+					{ level: 11, display: 'Elvans tabell' },
+					{ level: 12, display: 'Tolvans tabell' },
+					{ level: 13, display: 'Trettons tabell' },
+					{ level: 14, display: 'Fjortons tabell' },
+					{ level: 15, display: 'Femtons tabell' },
+					{ level: 16, display: 'Sextons tabell' },
+					{ level: 17, display: 'Sjuttons tabell' },
+					{ level: 18, display: 'Artons tabell' },
+					{ level: 19, display: 'Nittons tabell' },
+					{ level: 20, display: 'Tjugos tabell' }
 				],
 			};
 		}

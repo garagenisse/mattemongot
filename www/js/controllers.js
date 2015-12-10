@@ -14,13 +14,15 @@
 
 	.controller('PlayCtrl', function ($scope, $localStorage, $stateParams, $interval, MathService) {
 
-		// Local storage and routeparameters
-		$scope.$storage = $localStorage;
-		$scope.level = $scope.$storage.settings.levels[parseInt($stateParams.levelIndex)];
-		$scope.userLevel = $scope.$storage.userSettings.levels[parseInt($stateParams.levelIndex)];
-
 		// Ionice enter & leave
 		$scope.$on('$ionicView.enter', function (e) {
+
+			// Local storage and routeparameters
+			$scope.$storage = $localStorage;
+			$scope.level = $scope.$storage.settings.levels[parseInt($stateParams.levelIndex)];
+			$scope.userLevel = $scope.$storage.userSettings.levels[parseInt($stateParams.levelIndex)];
+			$scope.lastClick;
+
 			$scope.init();
 			$scope.cancel = $interval(timerTick, 1000);
 			console.log("Enter,start timer");
@@ -63,6 +65,13 @@
 
 		$scope.onClickAnswer = function(index) {
 			
+			var spamClickCheck = Date.now() - $scope.lastClick;
+			$scope.lastClick = Date.now();
+			if (spamClickCheck < 500) {
+				console.log("Spam click");
+				return;
+			}
+
 			$scope.isCorrect = $scope.quiz.correctIndex == index;
 			console.log("Answer is: " + ($scope.isCorrect ? "correct" : "incorrect"));
 			$scope.delta += (100-$scope.delta)/8 * ($scope.isCorrect ? 1 : -1 );
