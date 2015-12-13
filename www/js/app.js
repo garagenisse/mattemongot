@@ -7,98 +7,92 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.services', 'ngStorage', 'ngCordova'])
 
-.run(function ($ionicPlatform, SettingsService, $localStorage, $rootScope, $cordovaAppVersion) {
-	$ionicPlatform.ready(function () {
-		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-		// for form inputs)
-		if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-			cordova.plugins.Keyboard.disableScroll(true);
+	.run(function ($ionicPlatform, SettingsService, $localStorage, $rootScope, $cordovaAppVersion, $cordovaGoogleAnalytics) {
+		$ionicPlatform.ready(function () {
+			// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+			// for form inputs)
+			if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+				cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+				cordova.plugins.Keyboard.disableScroll(true);
 
-		}
-		if (window.StatusBar) {
-			// org.apache.cordova.statusbar required
-			StatusBar.styleDefault();
-		}
+			}
+			if (window.StatusBar) {
+				// org.apache.cordova.statusbar required
+				StatusBar.styleDefault();
+			}
 
-		// App version from cordova
-		if (window.cordova && window.cordova.plugins) {
-			$cordovaAppVersion.getVersionNumber().then(function (version) {
-				$rootScope.version = version;
+			// App version from cordova
+			if (window.cordova && window.cordova.plugins) {
+				$cordovaAppVersion.getVersionNumber().then(function (version) {
+					$rootScope.version = version;
+				});
 
-				// Upgrade settings
-				SettingsService.checkUpgrade($rootScope.version);
+				// turn on debug mode
+				$cordovaGoogleAnalytics.debugMode();
 
+				// Google analytics
+				$cordovaGoogleAnalytics.startTrackerWithId('UA-66615919-2');
+
+			} else {
+
+				// Kör alltid med senaste settings i Chrome för jag får inte ut versionsnummret...
+				$rootScope.version = "1.1.0";
+			}
+		
+			// Upgrade settings
+			SettingsService.checkUpgrade($rootScope.version);
+
+		});
+	})
+
+	.config(function ($stateProvider, $urlRouterProvider) {
+
+		// Ionic uses AngularUI Router which uses the concept of states
+		// Learn more here: https://github.com/angular-ui/ui-router
+		// Set up the various states which the app can be in.
+		// Each state's controller can be found in controllers.js
+		$stateProvider
+
+		// setup an abstract state for the tabs directive
+			.state('tab', {
+				url: '/tab',
+				abstract: true,
+				templateUrl: 'templates/tabs.html'
+			})
+
+		// Each tab has its own nav history stack:
+
+			.state('tab.dash', {
+				url: '/dash',
+				views: {
+					'tab-dash': {
+						templateUrl: 'templates/tab-dash.html',
+						controller: 'DashCtrl'
+					}
+				}
+			})
+
+			.state('tab.play', {
+				url: '/play/:levelIndex',
+				views: {
+					'tab-play': {
+						templateUrl: 'templates/tab-play.html',
+						controller: 'PlayCtrl'
+					}
+				}
+			})
+
+			.state('tab.settings', {
+				url: '/settings',
+				views: {
+					'tab-settings': {
+						templateUrl: 'templates/tab-settings.html',
+						controller: 'SettingsCtrl'
+					}
+				}
 			});
 
-			//// turn on debug mode
-			//$cordovaGoogleAnalytics.debugMode();
+		// if none of the above states are matched, use this as the fallback
+		$urlRouterProvider.otherwise('/tab/dash');
 
-			//// Google analytics
-			//$cordovaGoogleAnalytics.startTrackerWithId('UA-66615919-1');
-
-
-		} else {
-
-			// Kör alltid med senaste settings i Chrome för jag får inte ut versionsnummret...
-			//alert("Reset settings");
-			$localStorage.userSettings = SettingsService.getUserSettings();
-			$localStorage.settings = SettingsService.getSettings();
-			$localStorage.settings.version = "0.0.1";
-			$localStorage.userSettings.version = "0.0.1";
-			$rootScope.version = "0.0.1";
-		}
 	});
-})
-
-.config(function ($stateProvider, $urlRouterProvider) {
-
-	// Ionic uses AngularUI Router which uses the concept of states
-	// Learn more here: https://github.com/angular-ui/ui-router
-	// Set up the various states which the app can be in.
-	// Each state's controller can be found in controllers.js
-	$stateProvider
-
-	// setup an abstract state for the tabs directive
-	  .state('tab', {
-	  	url: '/tab',
-	  	abstract: true,
-	  	templateUrl: 'templates/tabs.html'
-	  })
-
-	// Each tab has its own nav history stack:
-
-	.state('tab.dash', {
-		url: '/dash',
-		views: {
-			'tab-dash': {
-				templateUrl: 'templates/tab-dash.html',
-				controller: 'DashCtrl'
-			}
-		}
-	})
-
-	.state('tab.play', {
-		url: '/play/:levelIndex',
-		views: {
-			'tab-play': {
-				templateUrl: 'templates/tab-play.html',
-				controller: 'PlayCtrl'
-			}
-		}
-	})
-
-	.state('tab.settings', {
-		url: '/settings',
-		views: {
-			'tab-settings': {
-				templateUrl: 'templates/tab-settings.html',
-				controller: 'SettingsCtrl'
-			}
-		}
-	});
-
-	// if none of the above states are matched, use this as the fallback
-	$urlRouterProvider.otherwise('/tab/dash');
-
-});
