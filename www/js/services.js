@@ -27,19 +27,30 @@
 
 			answers = _.shuffle(answers);
 			console.log("Answers shuffled: " + answers[0] + ", " + answers[1] + ", " + answers[2]);
-				
-			var correctIndex = _.findIndex(answers, function(a) { return a == r*timesTable;});
-			
-			return { quizDisplay: quiz, answers: answers, correctIndex: correctIndex};
+
+			var correctIndex = _.findIndex(answers, function (a) { return a == r * timesTable; });
+
+			return { quizDisplay: quiz, answers: answers, correctIndex: correctIndex };
 		};
 	})
 
 // Service for settings
 	.service('SettingsService', function ($localStorage) {
 
-		this.updateFrom_1_0_0 = function (version) {
-			// Nästa gång görs uppdatering här och då följer allt med från tidigare... men man kan också hoppa in på rätt nivå och löser alla fall nedan i switch
+		this.upgradeFrom_1_0_0 = function (version) {
+			
+			// 1.0.0 => 1.1.0 Add timed setting to userSettings, default to "true"		
+			$localStorage.userSettings.timed = true;
 		};
+
+		this.upgradeFrom_1_1_0 = function (version) {
+			
+			// Nästa gång görs uppdatering här och då följer allt med från tidigare... men man kan också hoppa in på rätt nivå och löser alla fall nedan i switch
+			
+			// OBS OBS Gör en ny upgrade from vid uppgradering
+		};
+		
+		
 
 		this.checkUpgrade = function (version) {
 
@@ -53,12 +64,21 @@
 			if (version != existingSettingsVersion) {
 
 				switch (existingSettingsVersion) {
-					//case "1.0.0":
-					//	{
-					//		this.upgradeFrom_2_0_0(version);
-					//		this.upgradeFrom_2_1_0(version);
-					//	}
-					//	break;
+					case "1.0.0":
+						{
+							this.upgradeFrom_1_0_0(version);
+							this.upgradeFrom_1_1_0(version);
+							// Bygg på här nästa gång
+						}
+						break;
+					case "1.1.0":
+						{
+							this.upgradeFrom_1_1_0(version);
+							// Bygg på här nästa gång
+							// OBS OBS Gör en ny upgrade from vid uppgradering
+						}
+						break;
+					// case "X.X.X"
 					default:
 						{
 							// Ingen vettig information, restora allt
@@ -76,6 +96,7 @@
 		this.getUserSettings = function () {
 			return {
 				sound: true,
+				timed: true,
 				levels: [
 					{ level: 1, stars: 0, stats: [] },
 					{ level: 2, stars: 0, stats: [] },
@@ -97,7 +118,7 @@
 					{ level: 18, stars: 0, stats: [] },
 					{ level: 19, stars: 0, stats: [] },
 					{ level: 20, stars: 0, stats: [] }
-			]
+				]
 			}
 		};
 
