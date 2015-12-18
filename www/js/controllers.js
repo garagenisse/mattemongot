@@ -89,7 +89,7 @@
 		}
 	})
 
-	.controller('SettingsCtrl', function ($scope, $rootScope, SettingsService, $ionicPopup, $localStorage) {
+	.controller('SettingsCtrl', function ($scope, $rootScope, SettingsService, $ionicPopup, $localStorage, $translate) {
 
 		$scope.$storage = $localStorage;
 		$scope.$on('$ionicView.enter', function (e) {
@@ -106,9 +106,11 @@
 
 		$scope.showConfirm = function () {
 			var confirmPopup = $ionicPopup.confirm({
-				title: 'Bekräfta återställning',
-				template: 'Är du säker på att du vill börja om?',
-				cancelText: 'Avbryt'
+				title: $translate.instant('panel_reset_title'),
+				template: $translate.instant('panel_reset_message'),
+				cancelText: $translate.instant('button_cancel'),
+				okText: $translate.instant('button_ok')
+
 			});
 			confirmPopup.then(function (res) {
 				if (res) {

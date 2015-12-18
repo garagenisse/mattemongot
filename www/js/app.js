@@ -5,10 +5,23 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.services', 'ngStorage', 'ngCordova'])
+angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.services', 'ngStorage', 'ngCordova','pascalprecht.translate'])
 
-.run(function ($ionicPlatform, SettingsService, $localStorage, $rootScope, $cordovaAppVersion) {
+.run(function ($ionicPlatform, SettingsService, $localStorage, $rootScope, $cordovaAppVersion, $translate) {
 	$ionicPlatform.ready(function () {
+
+		// http://robferguson.org/2015/07/22/internationalisation-i18n-and-localisation-l10n-for-ionic-apps/
+		// Se över denna och kontrollera
+		if (typeof navigator.globalization !== "undefined") {
+			navigator.globalization.getPreferredLanguage(function (language) {
+				$translate.use((language.value).split("-")[0]).then(function (data) {
+					console.log("SUCCESS -> " + data);
+				}, function (error) {
+					console.log("ERROR -> " + error);
+				});
+			}, null);
+		}
+
 		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 		// for form inputs)
 		if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -51,7 +64,7 @@ angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.
 	});
 })
 
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
 
 	// Ionic uses AngularUI Router which uses the concept of states
 	// Learn more here: https://github.com/angular-ui/ui-router
@@ -101,4 +114,36 @@ angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.
 	// if none of the above states are matched, use this as the fallback
 	$urlRouterProvider.otherwise('/tab/dash');
 
+	// Translations
+	$translateProvider.translations('en', {
+		title_level: "Level",
+		title_settings: "Settings",
+		title_play: "Play",
+
+		label_version: "Version:",
+
+		panel_reset_title: 'Confirm reset',
+		panel_reset_message: 'Are you sure you want to start over?',
+
+		button_reset: "Reset",
+		button_cancel: "Cancel",
+		button_ok: "Ok"
+
+	});
+	$translateProvider.translations('se', {
+		title_level: "Nivå",
+		title_settings: "Inställningar",
+		title_play: "Spela",
+
+		label_version: "Version:",
+
+		panel_reset_title: 'Bekräfta återställning',
+		panel_reset_message: 'Är du säker på att du vill börja om?',
+
+		button_reset: "Nollställ",
+		button_cancel: "Avbryt",
+		button_ok: "Ok"
+});
+	$translateProvider.preferredLanguage("en");
+	$translateProvider.fallbackLanguage("en");
 });

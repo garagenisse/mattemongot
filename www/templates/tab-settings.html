@@ -1,4 +1,4 @@
-﻿<ion-view view-title="Inställningar">
+﻿<ion-view view-title="{{ 'title_settings' | translate }}">
 	<ion-content>
 		<div class="card">
 
@@ -6,7 +6,7 @@
 			<div class="item item-avatar">
 				<img src="img/drawable-mdpi-icon.png">
 				<h2><strong>Mattemongot &copy;</strong></h2>
-				<p>Version: {{$root.version}}
+				<p>{{"label_version" | translate }} {{$root.version}}
 			</div>
 			<!-- Typsnitt -->
 			<div class="item list">
@@ -14,7 +14,7 @@
 				<li class="item">
 					<div class="row">
 						<div class="col text-center">
-							<button ng-click=showConfirm() class="button button-large button-outline icon ion-ios-trash button-assertive"> Nollställ</button>
+							<button ng-click=showConfirm() class="button button-large button-outline icon ion-ios-trash button-assertive"> {{"button_reset" | translate }}</button>
 						</div>
 					</div>
 				</li>
