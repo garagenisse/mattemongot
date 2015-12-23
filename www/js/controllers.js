@@ -1,6 +1,6 @@
 ﻿angular.module('mattemongot.controllers', [])
 
-	.controller('DashCtrl', function ($scope, $localStorage, $location, $state) {
+	.controller('DashCtrl', function ($scope, $localStorage, $location, $state, $translate) {
 
 		$scope.$storage = $localStorage;
 		$scope.$on('$ionicView.enter', function (e) {
@@ -10,9 +10,13 @@
 			$state.go('tab.play', { levelIndex: level });
 		};
 
+		$scope.translateLevel = function (label) {
+			return $translate.instant('levels.' + label);
+		}
+
 	})
 
-	.controller('PlayCtrl', function ($scope, $localStorage, $stateParams, $interval, MathService) {
+	.controller('PlayCtrl', function ($scope, $localStorage, $stateParams, $interval, MathService, $translate) {
 
 		// Ionice enter & leave
 		$scope.$on('$ionicView.enter', function (e) {
@@ -22,6 +26,7 @@
 			$scope.level = $scope.$storage.settings.levels[parseInt($stateParams.levelIndex)];
 			$scope.userLevel = $scope.$storage.userSettings.levels[parseInt($stateParams.levelIndex)];
 			$scope.lastClick;
+			$scope.levelDesc = $translate.instant('levels.' + $scope.level.label);
 
 			$scope.init();
 			$scope.cancel = $interval(timerTick, 1000);
@@ -106,10 +111,10 @@
 
 		$scope.showConfirm = function () {
 			var confirmPopup = $ionicPopup.confirm({
-				title: $translate.instant('panel_reset_title'),
-				template: $translate.instant('panel_reset_message'),
-				cancelText: $translate.instant('button_cancel'),
-				okText: $translate.instant('button_ok')
+				title: $translate.instant('reset_panel.title'),
+				template: $translate.instant('reset_panel.message'),
+				cancelText: $translate.instant('buttons.cancel'),
+				okText: $translate.instant('buttons.ok')
 
 			});
 			confirmPopup.then(function (res) {

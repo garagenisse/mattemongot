@@ -5,22 +5,40 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.services', 'ngStorage', 'ngCordova','pascalprecht.translate'])
+angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.services', 'ngStorage', 'ngCordova', 'pascalprecht.translate', 'tmh.dynamicLocale'])
 
-.run(function ($ionicPlatform, SettingsService, $localStorage, $rootScope, $cordovaAppVersion, $translate) {
+.constant('availableLanguages', ['en-us', 'sv-se'])
+.constant('defaultLanguage', 'en-us')
+
+.run(function ($ionicPlatform, SettingsService, $localStorage, $rootScope, $cordovaAppVersion, $cordovaGlobalization, $translate, defaultLanguage, tmhDynamicLocale, $window) {
+
 	$ionicPlatform.ready(function () {
 
-		// http://robferguson.org/2015/07/22/internationalisation-i18n-and-localisation-l10n-for-ionic-apps/
+		// https://medium.com/@skounis/internationalize-and-localize-your-ionic-application-e16b4db1907b#.ryaerfrin
 		// Se över denna och kontrollera
 		if (typeof navigator.globalization !== "undefined") {
 			navigator.globalization.getPreferredLanguage(function (language) {
-				$translate.use((language.value).split("-")[0]).then(function (data) {
+				//$translate.use((language.value).split("-")[0]).then(function (data) {
+				$translate.use(language.value.toLowercase()).then(function (data) {
 					console.log("SUCCESS -> " + data);
+					tmhDynamicLocale.set(language.value.toLowercase());
 				}, function (error) {
 					console.log("ERROR -> " + error);
+					tmhDynamicLocale.set(defaultLanguage);
 				});
 			}, null);
+		} else {
+			var locale = $window.navigator.language.toLocaleLowerCase();
+			console.log("Navigator lang: " + locale)
+			$translate.use(locale).then(function (data) {
+				console.log("SUCCESS -> " + data);
+				tmhDynamicLocale.set(locale);
+			}, function (error) {
+				console.log("ERROR -> " + error);
+				tmhDynamicLocale.set(defaultLanguage);
+			});
 		}
+
 
 		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 		// for form inputs)
@@ -41,14 +59,16 @@ angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.
 
 				// Upgrade settings
 				SettingsService.checkUpgrade($rootScope.version);
-
+			});
+			$cordovaAppVersion.getAppName().then(function (name) {
+				$rootScope.name = name;
 			});
 
-			//// turn on debug mode
-			//$cordovaGoogleAnalytics.debugMode();
+			// turn on debug mode
+			$cordovaGoogleAnalytics.debugMode();
 
-			//// Google analytics
-			//$cordovaGoogleAnalytics.startTrackerWithId('UA-66615919-1');
+			// Google analytics
+			$cordovaGoogleAnalytics.startTrackerWithId('UA-66615919-2');
 
 
 		} else {
@@ -60,11 +80,25 @@ angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.
 			$localStorage.settings.version = "0.0.1";
 			$localStorage.userSettings.version = "0.0.1";
 			$rootScope.version = "0.0.1";
+			$rootScope.name = "Mattemongot";
 		}
 	});
 })
 
-.config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
+.config(function ($stateProvider, $urlRouterProvider, $translateProvider, tmhDynamicLocaleProvider, defaultLanguage, availableLanguages) {
+
+	// Localization
+	tmhDynamicLocaleProvider.localeLocationPattern('js/locales/angular-locale_{{locale}}.js');
+	$translateProvider.useStaticFilesLoader({
+		'prefix': 'js/i18n/',
+		'suffix': '.json'
+	});
+	$translateProvider
+	.registerAvailableLanguageKeys(availableLanguages)
+	.preferredLanguage(defaultLanguage)
+	.fallbackLanguage('en-us')
+	.useSanitizeValueStrategy('escapeParameters');
+
 
 	// Ionic uses AngularUI Router which uses the concept of states
 	// Learn more here: https://github.com/angular-ui/ui-router
@@ -114,36 +148,29 @@ angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.
 	// if none of the above states are matched, use this as the fallback
 	$urlRouterProvider.otherwise('/tab/dash');
 
-	// Translations
-	$translateProvider.translations('en', {
-		title_level: "Level",
-		title_settings: "Settings",
-		title_play: "Play",
+	//// Translations
+	//$translateProvider.useStaticFilesLoader({
+	//	prefix: 'js/locales/',
+	//	suffix: '.json'
+	//})
+	////0. English         en
+	////1. French          fr
+	////2. German          de
+	////5. Swedish         sv
+	////6. Spanish         es
+	////7. Danish          da
+	////9. Norwegian       nb
+	////13. Finnish         fi
+	////32. Russian         ru
+	////33. Chinese         zh
+	////151. Nynorsk         nn
+	//.registerAvailableLanguageKeys(['en', 'fr', 'de', 'sv', 'es','da','nb','fi','ru','zh','nn'])
+	////.registerAvailableLanguageKeys(['en', 'sv'], {
+	////	'en': 'en', 'en_*': 'en',
+	////	'se': 'se', 'sv': 'se', 'sv_*': 'se'
+	////})
+	//.fallbackLanguage('en')
+	//.determinePreferredLanguage()
+	//.useSanitizeValueStrategy('escapeParameters');
 
-		label_version: "Version:",
-
-		panel_reset_title: 'Confirm reset',
-		panel_reset_message: 'Are you sure you want to start over?',
-
-		button_reset: "Reset",
-		button_cancel: "Cancel",
-		button_ok: "Ok"
-
-	});
-	$translateProvider.translations('se', {
-		title_level: "Nivå",
-		title_settings: "Inställningar",
-		title_play: "Spela",
-
-		label_version: "Version:",
-
-		panel_reset_title: 'Bekräfta återställning',
-		panel_reset_message: 'Är du säker på att du vill börja om?',
-
-		button_reset: "Nollställ",
-		button_cancel: "Avbryt",
-		button_ok: "Ok"
-});
-	$translateProvider.preferredLanguage("en");
-	$translateProvider.fallbackLanguage("en");
 });

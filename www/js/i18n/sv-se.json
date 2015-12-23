@@ -1,0 +1,45 @@
+﻿{
+	"tabs": {
+		"dashboard": "Statistik",
+		"settings": "Inställningar",
+		"play": "Spela"
+	},
+	"dash": {
+	},
+	"play": {
+	},
+	"settings": {
+		"version": "Version:"
+	},
+	"buttons": {
+		"reset": "Nollställ",
+		"cancel": "Avbryt",
+		"ok": "Ok"
+	},
+	"reset_panel": {
+		"title": "Bekräfta återställning",
+		"message": "Är du säker på att du vill börja om?"
+	},
+	"levels": {
+		"1_table": "Ettans tabell",
+		"2_table": "Tvåans tabell",
+		"3_table": "Treans tabell",
+		"4_table": "Fyrans tabell",
+		"5_table": "Femmans tabell",
+		"6_table": "Sexans tabell",
+		"7_table": "Sjuans tabell",
+		"8_table": "Åttans tabell",
+		"9_table": "Nians tabell",
+		"10_table": "Tians tabell",
+		"11_table": "Elvans tabell",
+		"12_table": "Tolvans tabell",
+		"13_table": "Trettons tabell",
+		"14_table": "Fjortons tabell",
+		"15_table": "Femtons tabell",
+		"16_table": "Sextons tabell",
+		"17_table": "Sjuttons tabell",
+		"18_table": "Artons tabell",
+		"19_table": "Nittons tabell",
+		"20_table": "Tjugans tabell"
+	}
+}
