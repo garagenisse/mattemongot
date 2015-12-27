@@ -1,0 +1,46 @@
+{
+	"tabs": {
+		"dashboard": "仪表盘",
+		"settings": "设置",
+		"play": "玩"
+	},
+	"dash": {
+	},
+	"play": {
+	},
+	"settings": {
+		"version": "版:",
+		"ontime": "准时？"
+	},
+	"buttons": {
+		"reset": "清除",
+		"cancel": "撤消",
+		"ok": "好"
+	},
+	"reset_panel": {
+		"title": "确认重置",
+		"message": "您确定要重新开始？"
+	},
+	"levels": {
+		"1_table": "第一个表",
+		"2_table": "第二个表",
+		"3_table": "第三个表",
+		"4_table": "第四个表",
+		"5_table": "第五表",
+		"6_table": "第六表",
+		"7_table": "第七表",
+		"8_table": "第八表",
+		"9_table": "第九表",
+		"10_table": "第十表",
+		"11_table": "第十一表",
+		"12_table": "第十二表",
+		"13_table": "第十三表",
+		"14_table": "第十四表",
+		"15_table": "第十五表",
+		"16_table": "第十六表",
+		"17_table": "第十七表",
+		"18_table": "十八表",
+		"19_table": "十九表",
+		"20_table": "二十桌"
+	}
+}

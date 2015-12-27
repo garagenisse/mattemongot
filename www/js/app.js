@@ -146,29 +146,40 @@ angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.
 		// if none of the above states are matched, use this as the fallback
 		$urlRouterProvider.otherwise('/tab/dash');
 
-		//// Translations
-		//$translateProvider.useStaticFilesLoader({
-		//	prefix: 'js/locales/',
-		//	suffix: '.json'
-		//})
-		////0. English         en
-		////1. French          fr
-		////2. German          de
-		////5. Swedish         sv
-		////6. Spanish         es
-		////7. Danish          da
-		////9. Norwegian       nb
-		////13. Finnish         fi
-		////32. Russian         ru
-		////33. Chinese         zh
-		////151. Nynorsk         nn
-		//.registerAvailableLanguageKeys(['en', 'fr', 'de', 'sv', 'es','da','nb','fi','ru','zh','nn'])
-		////.registerAvailableLanguageKeys(['en', 'sv'], {
-		////	'en': 'en', 'en_*': 'en',
-		////	'se': 'se', 'sv': 'se', 'sv_*': 'se'
-		////})
-		//.fallbackLanguage('en')
-		//.determinePreferredLanguage()
-		//.useSanitizeValueStrategy('escapeParameters');
+		// Android lang codes:
+		//http://stackoverflow.com/questions/7973023/what-is-the-list-of-supported-languages-locales-on-android
+		
+		// Språk en-us
+		// Dashboard
+		// Settings
+		// Play
+		// Version
+		// Timed?
+		// Reset
+		// Cancel
+		// Ok
+		// Confirm reset
+		// Are  you sure you want to start over?
+		// First table
+		// Second table
+		// Third table
+		// Fourth table
+		// Fifth table
+		// Sixth table
+		// Seventh table
+		// Eighth table
+		// Ninth table
+		// Tenth table
+		// Eleventh table
+		// Twelfth table
+		// Thirteenth table
+		// Fourteenth table
+		// Fifteenth table
+		// Sixteenth table
+		// Seventeenth table
+		// Eighteenth table
+		// Nineteenth table
+		// Twentieth table
+
 
 	});

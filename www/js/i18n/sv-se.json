@@ -9,7 +9,8 @@
 	"play": {
 	},
 	"settings": {
-		"version": "Version:"
+		"version": "Version:",
+		"ontime": "På tid?"
 	},
 	"buttons": {
 		"reset": "Nollställ",

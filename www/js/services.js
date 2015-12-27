@@ -45,12 +45,9 @@
 
 		this.upgradeFrom_1_1_0 = function (version) {
 			
-			// Nästa gång görs uppdatering här och då följer allt med från tidigare... men man kan också hoppa in på rätt nivå och löser alla fall nedan i switch
-			
-			// OBS OBS Gör en ny upgrade from vid uppgradering
+			// Nu hantering av översättningar, tabort den gamla display propertyn från alla settings.levels och lägg dit labels
+			$localStorage.settings = this.getSettings();
 		};
-		
-		
 
 		this.checkUpgrade = function (version) {
 
@@ -75,10 +72,13 @@
 						{
 							this.upgradeFrom_1_1_0(version);
 							// Bygg på här nästa gång
-							// OBS OBS Gör en ny upgrade from vid uppgradering
 						}
 						break;
-					// case "X.X.X"
+					case "1.2.0":
+						{
+							//this.upgradeFrom_1_2_0(version);
+						}
+						break;
 					default:
 						{
 							// Ingen vettig information, restora allt
