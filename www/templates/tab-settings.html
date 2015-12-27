@@ -8,8 +8,16 @@
 				<h2><strong>{{$root.name}} &copy;</strong></h2>
 				<p>{{"settings.version" | translate }} {{$root.version}}</p>
 			</div>
-			<!-- Typsnitt -->
 			<div class="item list">
+				<li class="item item-toggle">
+					På tid?
+					<label class="toggle toggle-postitive">
+						<input type="checkbox" ng-model="$storage.userSettings.timed">
+						<div class="track">
+							<div class="handle"></div>
+						</div>
+					</label>
+				</li>
 				<!-- Reset -->
 				<li class="item">
 					<div class="row">
