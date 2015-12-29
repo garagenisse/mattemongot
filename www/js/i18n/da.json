@@ -1,6 +1,6 @@
 {
 	"tabs": {
-		"dashboard": "Instrumentbræt",
+		"dashboard": "Niveau",
 		"settings": "Indstillinger",
 		"play": "Spil"
 	},
@@ -10,7 +10,7 @@
 	},
 	"settings": {
 		"version": "Version:",
-		"ontime": "Timet ?"
+		"ontime": "Timet?"
 	},
 	"buttons": {
 		"reset": "Nulstil",

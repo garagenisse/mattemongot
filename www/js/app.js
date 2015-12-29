@@ -18,8 +18,8 @@ angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.
 			// Se över denna och kontrollera
 			if (typeof navigator.globalization !== "undefined") {
 				navigator.globalization.getPreferredLanguage(function (language) {
-					//$translate.use((language.value).split("-")[0]).then(function (data) {
-					$translate.use(language.value.toLowercase()).then(function (data) {
+					$translate.use(language.value.toLowercase().substring(0,2)).then(function (data) {
+					//$translate.use(language.value.toLowercase()).then(function (data) {
 						console.log("SUCCESS -> " + data);
 						tmhDynamicLocale.set(language.value.toLowercase());
 					}, function (error) {
@@ -28,7 +28,7 @@ angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.
 					});
 				}, null);
 			} else {
-				var locale = $window.navigator.language.toLocaleLowerCase();
+				var locale = "da-dk"; // $window.navigator.language.toLocaleLowerCase();
 				console.log("Navigator lang: " + locale)
 				$translate.use(locale).then(function (data) {
 					console.log("SUCCESS -> " + data);
@@ -150,36 +150,36 @@ angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.
 		//http://stackoverflow.com/questions/7973023/what-is-the-list-of-supported-languages-locales-on-android
 		
 		// Språk en-us
-		// Dashboard
-		// Settings
-		// Play
-		// Version
-		// Timed?
-		// Reset
-		// Cancel
-		// Ok
-		// Confirm reset
-		// Are  you sure you want to start over?
-		// First table
-		// Second table
-		// Third table
-		// Fourth table
-		// Fifth table
-		// Sixth table
-		// Seventh table
-		// Eighth table
-		// Ninth table
-		// Tenth table
-		// Eleventh table
-		// Twelfth table
-		// Thirteenth table
-		// Fourteenth table
-		// Fifteenth table
-		// Sixteenth table
-		// Seventeenth table
-		// Eighteenth table
-		// Nineteenth table
-		// Twentieth table
+//		 Level
+//		 Settings
+//		 Play
+//		 Version
+//		 Timed?
+//		 Reset
+//		 Cancel
+//		 Ok
+//		 Confirm reset
+//		 Are  you sure you want to start over?
+//		 First table
+//		 Second table
+//		 Third table
+//		 Fourth table
+//		 Fifth table
+//		 Sixth table
+//		 Seventh table
+//		 Eighth table
+//		 Ninth table
+//		 Tenth table
+//		 Eleventh table
+//		 Twelfth table
+//		 Thirteenth table
+//		 Fourteenth table
+//		 Fifteenth table
+//		 Sixteenth table
+//		 Seventeenth table
+//		 Eighteenth table
+//		 Nineteenth table
+//		 Twentieth table
 
 
 	});

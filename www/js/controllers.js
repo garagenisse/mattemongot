@@ -4,7 +4,9 @@
 
 		$scope.$storage = $localStorage;
 		$scope.$on('$ionicView.enter', function (e) {
-			$cordovaGoogleAnalytics.trackView('Dashboard');
+			if (typeof window.analytics !== 'undefined'){
+				$cordovaGoogleAnalytics.trackView('Dashboard');
+			}
 		});
 
 		$scope.selectLevel = function (level) {
@@ -22,8 +24,9 @@
 		// Ionice enter & leave
 		$scope.$on('$ionicView.enter', function (e) {
 
-			$cordovaGoogleAnalytics.trackView('Play');
-
+			if (typeof window.analytics !== 'undefined'){
+				$cordovaGoogleAnalytics.trackView('Play');
+			}
 			// Local storage and routeparameters
 			$scope.$storage = $localStorage;
 			$scope.level = $scope.$storage.settings.levels[parseInt($stateParams.levelIndex)];
@@ -106,7 +109,9 @@
 
 		$scope.$storage = $localStorage;
 		$scope.$on('$ionicView.enter', function (e) {
-			$cordovaGoogleAnalytics.trackView('Settings');
+			if (typeof window.analytics !== 'undefined'){
+				$cordovaGoogleAnalytics.trackView('Settings');
+			}
 		});
 
 
