@@ -1,0 +1,46 @@
+{
+	"tabs": {
+		"dashboard": "Nivel",
+		"settings": "Ajustes",
+		"play": "Jugar"
+	},
+	"dash": {
+	},
+	"play": {
+	},
+	"settings": {
+		"version": "Versión:",
+		"ontime": "Programado?"
+	},
+	"buttons": {
+		"reset": "Reiniciar",
+		"cancel": "Cancelar",
+		"ok": "Ok"
+	},
+	"reset_panel": {
+		"title": "Confirmar restablecer",
+		"message": "¿Seguro que deseas empezar de nuevo"
+	},
+	"levels": {
+		"1_table": "Primera mesa",
+		"2_table": "Segunda mesa",
+		"3_table": "Tercera mesa",
+		"4_table": "Cuarta mesa",
+		"5_table": "Mesa quinta",
+		"6_table": "Sexta mesa",
+		"7_table": "Mesa séptimo",
+		"8_table": "Octava mesa",
+		"9_table": "Mesa novena",
+		"10_table": "Décima mesa",
+		"11_table": "Mesa undécimo",
+		"12_table": "Twelfth table",
+		"13_table": "Thirteenth table",
+		"14_table": "Fourteenth table",
+		"15_table": "Fifteenth table",
+		"16_table": "Sixteenth table",
+		"17_table": "Seventeenth table",
+		"18_table": "Eighteenth table",
+		"19_table": "Nineteenth table",
+		"20_table": "Twentieth table"
+	}
+}

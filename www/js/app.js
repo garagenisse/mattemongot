@@ -5,10 +5,41 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.services', 'ngStorage', 'ngCordova'])
+angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.services', 'ngStorage', 'ngCordova', 'pascalprecht.translate', 'tmh.dynamicLocale'])
 
-	.run(function ($ionicPlatform, SettingsService, $localStorage, $rootScope, $cordovaAppVersion, $cordovaGoogleAnalytics) {
+	.constant('availableLanguages', ['en-us', 'sv-se'])
+	.constant('defaultLanguage', 'en-us')
+
+	.run(function ($ionicPlatform, SettingsService, $localStorage, $rootScope, $cordovaAppVersion, $cordovaGlobalization, $translate, defaultLanguage, tmhDynamicLocale, $window) {
+
 		$ionicPlatform.ready(function () {
+
+			// https://medium.com/@skounis/internationalize-and-localize-your-ionic-application-e16b4db1907b#.ryaerfrin
+			// Se över denna och kontrollera
+			if (typeof navigator.globalization !== "undefined") {
+				navigator.globalization.getPreferredLanguage(function (language) {
+					$translate.use(language.value.toLowercase().substring(0,2)).then(function (data) {
+					//$translate.use(language.value.toLowercase()).then(function (data) {
+						console.log("SUCCESS -> " + data);
+						tmhDynamicLocale.set(language.value.toLowercase());
+					}, function (error) {
+						console.log("ERROR -> " + error);
+						tmhDynamicLocale.set(defaultLanguage);
+					});
+				}, null);
+			} else {
+				var locale = "da-dk"; // $window.navigator.language.toLocaleLowerCase();
+				console.log("Navigator lang: " + locale)
+				$translate.use(locale).then(function (data) {
+					console.log("SUCCESS -> " + data);
+					tmhDynamicLocale.set(locale);
+				}, function (error) {
+					console.log("ERROR -> " + error);
+					tmhDynamicLocale.set(defaultLanguage);
+				});
+			}
+
+
 			// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 			// for form inputs)
 			if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -25,6 +56,12 @@ angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.
 			if (window.cordova && window.cordova.plugins) {
 				$cordovaAppVersion.getVersionNumber().then(function (version) {
 					$rootScope.version = version;
+
+					// Upgrade settings
+					SettingsService.checkUpgrade($rootScope.version);
+				});
+				$cordovaAppVersion.getAppName().then(function (name) {
+					$rootScope.name = name;
 				});
 
 				// turn on debug mode
@@ -32,20 +69,33 @@ angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.
 
 				// Google analytics
 				$cordovaGoogleAnalytics.startTrackerWithId('UA-66615919-2');
-
 			} else {
 
-				// Kör alltid med senaste settings i Chrome för jag får inte ut versionsnummret...
-				$rootScope.version = "1.2.0";
+				// Dummysetting för browserdebug
+				$localStorage.userSettings = SettingsService.getUserSettings();
+				$localStorage.settings = SettingsService.getSettings();
+				$localStorage.settings.version = "0.0.1";
+				$localStorage.userSettings.version = "0.0.1";
+				$rootScope.version = "0.0.1";
+				$rootScope.name = "Mattemongot";
 			}
-		
-			// Upgrade settings
-			SettingsService.checkUpgrade($rootScope.version);
-
 		});
 	})
 
-	.config(function ($stateProvider, $urlRouterProvider) {
+	.config(function ($stateProvider, $urlRouterProvider, $translateProvider, tmhDynamicLocaleProvider, defaultLanguage, availableLanguages) {
+
+		// Localization
+		tmhDynamicLocaleProvider.localeLocationPattern('js/locales/angular-locale_{{locale}}.js');
+		$translateProvider.useStaticFilesLoader({
+			'prefix': 'js/i18n/',
+			'suffix': '.json'
+		});
+		$translateProvider
+			.registerAvailableLanguageKeys(availableLanguages)
+			.preferredLanguage(defaultLanguage)
+			.fallbackLanguage('en-us')
+			.useSanitizeValueStrategy('escapeParameters');
+
 
 		// Ionic uses AngularUI Router which uses the concept of states
 		// Learn more here: https://github.com/angular-ui/ui-router
@@ -94,5 +144,41 @@ angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.
 
 		// if none of the above states are matched, use this as the fallback
 		$urlRouterProvider.otherwise('/tab/dash');
+
+		// Android lang codes:
+		//http://stackoverflow.com/questions/7973023/what-is-the-list-of-supported-languages-locales-on-android
+		
+		// Språk en-us
+//		 Level
+//		 Settings
+//		 Play
+//		 Version
+//		 Timed?
+//		 Reset
+//		 Cancel
+//		 Ok
+//		 Confirm reset
+//		 Are  you sure you want to start over?
+//		 First table
+//		 Second table
+//		 Third table
+//		 Fourth table
+//		 Fifth table
+//		 Sixth table
+//		 Seventh table
+//		 Eighth table
+//		 Ninth table
+//		 Tenth table
+//		 Eleventh table
+//		 Twelfth table
+//		 Thirteenth table
+//		 Fourteenth table
+//		 Fifteenth table
+//		 Sixteenth table
+//		 Seventeenth table
+//		 Eighteenth table
+//		 Nineteenth table
+//		 Twentieth table
+
 
 	});

@@ -1,4 +1,4 @@
-﻿<ion-view view-title="Nivå">
+﻿<ion-view view-title="{{ 'tabs.dashboard' | translate }}">
 	<ion-content class="padding paperback">
 		<br />
 		<div class="list card">
@@ -7,7 +7,7 @@
 				<div class="row" ng-repeat="level in $storage.userSettings.levels track by $index">
 					<div class="col col-90">
 						<button class="button button-block button-positive" ng-click="selectLevel($index)">
-							{{$storage.settings.levels[$index].level}}. {{$storage.settings.levels[$index].display}}
+							{{$storage.settings.levels[$index].level}}. {{translateLevel($storage.settings.levels[$index].label)}}
 						</button>
 					</div>
 					<div class="col col-15 col-center">

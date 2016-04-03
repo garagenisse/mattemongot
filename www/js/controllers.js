@@ -1,10 +1,10 @@
 ﻿angular.module('mattemongot.controllers', [])
 
-	.controller('DashCtrl', function ($scope, $localStorage, $location, $state,$cordovaGoogleAnalytics) {
+	.controller('DashCtrl', function ($scope, $localStorage, $location, $state, $translate, $cordovaGoogleAnalytics) {
 
 		$scope.$storage = $localStorage;
 		$scope.$on('$ionicView.enter', function (e) {
-			if (window.cordova && window.cordova.plugins) {
+			if (typeof window.analytics !== 'undefined'){
 				$cordovaGoogleAnalytics.trackView('Dashboard');
 			}
 		});
@@ -13,14 +13,18 @@
 			$state.go('tab.play', { levelIndex: level });
 		};
 
+		$scope.translateLevel = function (label) {
+			return $translate.instant('levels.' + label);
+		}
+
 	})
 
-	.controller('PlayCtrl', function ($scope, $localStorage, $stateParams, $interval, MathService,$cordovaGoogleAnalytics) {
+	.controller('PlayCtrl', function ($scope, $localStorage, $stateParams, $interval, MathService, $translate, $cordovaGoogleAnalytics) {
 
 		// Ionice enter & leave
 		$scope.$on('$ionicView.enter', function (e) {
 
-			if (window.cordova && window.cordova.plugins) {
+			if (typeof window.analytics !== 'undefined'){
 				$cordovaGoogleAnalytics.trackView('Play');
 			}
 			// Local storage and routeparameters
@@ -28,6 +32,7 @@
 			$scope.level = $scope.$storage.settings.levels[parseInt($stateParams.levelIndex)];
 			$scope.userLevel = $scope.$storage.userSettings.levels[parseInt($stateParams.levelIndex)];
 			$scope.lastClick;
+			$scope.levelDesc = $translate.instant('levels.' + $scope.level.label);
 
 			$scope.init();
 			if ($localStorage.userSettings.timed) {
@@ -100,12 +105,12 @@
 		}
 	})
 
-	.controller('SettingsCtrl', function ($scope, $rootScope, SettingsService, $ionicPopup, $localStorage, $cordovaGoogleAnalytics) {
+	.controller('SettingsCtrl', function ($scope, $rootScope, SettingsService, $ionicPopup, $localStorage, $translate, $cordovaGoogleAnalytics) {
 
 		$scope.$storage = $localStorage;
 		$scope.$on('$ionicView.enter', function (e) {
-			if (window.cordova && window.cordova.plugins) {
-			$cordovaGoogleAnalytics.trackView('Settings');
+			if (typeof window.analytics !== 'undefined'){
+				$cordovaGoogleAnalytics.trackView('Settings');
 			}
 		});
 
@@ -120,9 +125,11 @@
 
 		$scope.showConfirm = function () {
 			var confirmPopup = $ionicPopup.confirm({
-				title: 'Bekräfta återställning',
-				template: 'Är du säker på att du vill börja om?',
-				cancelText: 'Avbryt'
+				title: $translate.instant('reset_panel.title'),
+				template: $translate.instant('reset_panel.message'),
+				cancelText: $translate.instant('buttons.cancel'),
+				okText: $translate.instant('buttons.ok')
+
 			});
 			confirmPopup.then(function (res) {
 				if (res) {

@@ -45,12 +45,9 @@
 
 		this.upgradeFrom_1_1_0 = function (version) {
 			
-			// Nästa gång görs uppdatering här och då följer allt med från tidigare... men man kan också hoppa in på rätt nivå och löser alla fall nedan i switch
-			
-			// OBS OBS Gör en ny upgrade from vid uppgradering
+			// Nu hantering av översättningar, tabort den gamla display propertyn från alla settings.levels och lägg dit labels
+			$localStorage.settings = this.getSettings();
 		};
-		
-		
 
 		this.checkUpgrade = function (version) {
 
@@ -75,10 +72,13 @@
 						{
 							this.upgradeFrom_1_1_0(version);
 							// Bygg på här nästa gång
-							// OBS OBS Gör en ny upgrade from vid uppgradering
 						}
 						break;
-					// case "X.X.X"
+					case "1.2.0":
+						{
+							//this.upgradeFrom_1_2_0(version);
+						}
+						break;
 					default:
 						{
 							// Ingen vettig information, restora allt
@@ -125,26 +125,26 @@
 		this.getSettings = function () {
 			return {
 				levels: [
-					{ level: 1, display: 'Ettans tabell' },
-					{ level: 2, display: 'Tvåans tabell' },
-					{ level: 3, display: 'Treans tabell' },
-					{ level: 4, display: 'Fyrans tabell' },
-					{ level: 5, display: 'Femmans tabell' },
-					{ level: 6, display: 'Sexans tabell' },
-					{ level: 7, display: 'Sjuans tabell' },
-					{ level: 8, display: 'Åttans tabell' },
-					{ level: 9, display: 'Nians tabell' },
-					{ level: 10, display: 'Tians tabell' },
-					{ level: 11, display: 'Elvans tabell' },
-					{ level: 12, display: 'Tolvans tabell' },
-					{ level: 13, display: 'Trettons tabell' },
-					{ level: 14, display: 'Fjortons tabell' },
-					{ level: 15, display: 'Femtons tabell' },
-					{ level: 16, display: 'Sextons tabell' },
-					{ level: 17, display: 'Sjuttons tabell' },
-					{ level: 18, display: 'Artons tabell' },
-					{ level: 19, display: 'Nittons tabell' },
-					{ level: 20, display: 'Tjugos tabell' }
+					{ level: 1, label: "1_table" },
+					{ level: 2, label: "2_table" },
+					{ level: 3, label: "3_table" },
+					{ level: 4, label: "4_table" },
+					{ level: 5, label: "5_table" },
+					{ level: 6, label: "6_table" },
+					{ level: 7, label: "7_table" },
+					{ level: 8, label: "8_table" },
+					{ level: 9, label: "9_table" },
+					{ level: 10, label: "10_table" },
+					{ level: 11, label: "11_table" },
+					{ level: 12, label: "12_table" },
+					{ level: 13, label: "13_table" },
+					{ level: 14, label: "14_table" },
+					{ level: 15, label: "15_table" },
+					{ level: 16, label: "16_table" },
+					{ level: 17, label: "17_table" },
+					{ level: 18, label: "18_table" },
+					{ level: 19, label: "19_table" },
+					{ level: 20, label: "20_table" }
 				],
 			};
 		}

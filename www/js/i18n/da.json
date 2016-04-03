@@ -1,0 +1,46 @@
+{
+	"tabs": {
+		"dashboard": "Niveau",
+		"settings": "Indstillinger",
+		"play": "Spil"
+	},
+	"dash": {
+	},
+	"play": {
+	},
+	"settings": {
+		"version": "Version:",
+		"ontime": "Timet?"
+	},
+	"buttons": {
+		"reset": "Nulstil",
+		"cancel": "Ophæve",
+		"ok": "Okay"
+	},
+	"reset_panel": {
+		"title": "Bekræft reset",
+		"message": "Er du sikker på du vil starte forfra ?"
+	},
+	"levels": {
+		"1_table": "Første tabel",
+		"2_table": "Anden tabel",
+		"3_table": "Tredje tabel",
+		"4_table": "Fjerde tabel",
+		"5_table": "Femte tabel",
+		"6_table": "Sjette tabel",
+		"7_table": "Syvende tabel",
+		"8_table": "Ottende tabel",
+		"9_table": "Niende tabel",
+		"10_table": "Tiende tabel",
+		"11_table": "Elvte tabel",
+		"12_table": "Tolvte tabel",
+		"13_table": "Trettende tabel",
+		"14_table": "Fjortende tabel",
+		"15_table": "Femtende tabel",
+		"16_table": "Sekstende tabel",
+		"17_table": "Syttende tabel",
+		"18_table": "Attende tabel",
+		"19_table": "Nittende tabel",
+		"20_table": "Tyvende tabel"
+	}
+}

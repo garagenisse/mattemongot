@@ -1,0 +1,46 @@
+{
+	"tabs": {
+		"dashboard": "Ebene",
+		"settings": "Einstellungen",
+		"play": "Spielen"
+	},
+	"dash": {
+	},
+	"play": {
+	},
+	"settings": {
+		"version": "Version:",
+		"ontime": "Zeitüberschreitung?"
+	},
+	"buttons": {
+		"reset": "Reset",
+		"cancel": "Absagen",
+		"ok": "Ok"
+	},
+	"reset_panel": {
+		"title": "Bestätigen Reset",
+		"message": "Sind Sie sicher, dass Sie von vorne beginnen möchten?"
+	},
+	"levels": {
+		"1_table": "Erste tabelle",
+		"2_table": "Zweite tabelle",
+		"3_table": "Dritte tabelle",
+		"4_table": "Vierte tabelle",
+		"5_table": "Fünfte tabelle",
+		"6_table": "Sechste tabelle",
+		"7_table": "Siebste tabelle",
+		"8_table": "Achte tabelle",
+		"9_table": "Neunte tabelle",
+		"10_table": "Zehnten tabelle",
+		"11_table": "Elfte tabelle",
+		"12_table": "Zwölfzte tabelle",
+		"13_table": "Dreizehnte tabelle",
+		"14_table": "Vierzehnte tabelle",
+		"15_table": "Fünfzehnte tabelle",
+		"16_table": "Sechzehnte tabelle",
+		"17_table": "Siebzehnte tabelle",
+		"18_table": "Achtzehnte tabelle",
+		"19_table": "Neunzehnte tabelle",
+		"20_table": "Zwansigsten tabelle"
+	}
+}
