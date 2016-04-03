@@ -44,6 +44,10 @@
 		};
 
 		this.upgradeFrom_1_1_0 = function (version) {
+			// Nothing			
+		};
+
+		this.upgradeFrom_1_2_0 = function (version) {
 			
 			// Nu hantering av översättningar, tabort den gamla display propertyn från alla settings.levels och lägg dit labels
 			$localStorage.settings = this.getSettings();
@@ -65,18 +69,20 @@
 						{
 							this.upgradeFrom_1_0_0(version);
 							this.upgradeFrom_1_1_0(version);
+							this.upgradeFrom_1_2_0(version);
 							// Bygg på här nästa gång
 						}
 						break;
 					case "1.1.0":
 						{
 							this.upgradeFrom_1_1_0(version);
+							this.upgradeFrom_1_2_0(version);
 							// Bygg på här nästa gång
 						}
 						break;
 					case "1.2.0":
 						{
-							//this.upgradeFrom_1_2_0(version);
+							this.upgradeFrom_1_2_0(version);
 						}
 						break;
 					default:
