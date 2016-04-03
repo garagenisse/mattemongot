@@ -28,8 +28,7 @@ angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.
 					});
 				}, null);
 			} else {
-				var locale = "da-dk"; // $window.navigator.language.toLocaleLowerCase();
-				console.log("Navigator lang: " + locale)
+				var locale = "sv"; // $window.navigator.language.toLocaleLowerCase();
 				$translate.use(locale).then(function (data) {
 					console.log("SUCCESS -> " + data);
 					tmhDynamicLocale.set(locale);
@@ -71,12 +70,12 @@ angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.
 				$cordovaGoogleAnalytics.startTrackerWithId('UA-66615919-2');
 			} else {
 
-				// Dummysetting för browserdebug
+				// Dummysetting för browserdebug, denna version failar uppgradering och återställer till default
 				$localStorage.userSettings = SettingsService.getUserSettings();
 				$localStorage.settings = SettingsService.getSettings();
 				$localStorage.settings.version = "0.0.1";
 				$localStorage.userSettings.version = "0.0.1";
-				$rootScope.version = "0.0.1";
+				$rootScope.version = "0.0.1";		
 				$rootScope.name = "Mattemongot";
 			}
 		});
