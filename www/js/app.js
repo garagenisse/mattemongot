@@ -36,7 +36,7 @@ angular.module('mattemongot', ['ionic', 'mattemongot.controllers', 'mattemongot.
 			} else {
 
 				// Kör alltid med senaste settings i Chrome för jag får inte ut versionsnummret...
-				$rootScope.version = "1.1.0";
+				$rootScope.version = "1.2.0";
 			}
 		
 			// Upgrade settings
