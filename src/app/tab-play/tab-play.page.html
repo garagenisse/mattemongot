@@ -36,7 +36,8 @@
               class="answer-button" 
               expand="block"
               (click)="onClickAnswer(i)"
-              [color]="isCorrect ? 'primary' : (quiz?.correctIndex === i ? 'success' : 'danger')">
+              [color]="getButtonColor(i)"
+              [disabled]="showFeedback">
               {{ answer }}
             </ion-button>
           </ion-col>

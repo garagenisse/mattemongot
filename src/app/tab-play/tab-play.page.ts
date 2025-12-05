@@ -45,8 +45,9 @@ export class TabPlayPage implements OnInit, OnDestroy {
   userLevel: UserLevelSettings | null = null;
   levelDesc = '';
   delta = 0;
-  isCorrect = true;
   isTimed = true;
+  selectedAnswerIndex: number | null = null;
+  showFeedback = false;
   private levelIndex = 0;
   private timerInterval: ReturnType<typeof setInterval> | null = null;
   private lastClick = 0;
@@ -93,7 +94,8 @@ export class TabPlayPage implements OnInit, OnDestroy {
   private init(): void {
     this.createQuiz();
     this.delta = 0;
-    this.isCorrect = true;
+    this.selectedAnswerIndex = null;
+    this.showFeedback = false;
   }
 
   private startTimer(): void {
@@ -156,21 +158,25 @@ export class TabPlayPage implements OnInit, OnDestroy {
       return;
     }
 
-    if (!this.quiz) return;
+    if (!this.quiz || this.showFeedback) return;
 
-    this.isCorrect = this.quiz.correctIndex === index;
-    console.log('Answer is:', this.isCorrect ? 'correct' : 'incorrect');
+    this.selectedAnswerIndex = index;
+    this.showFeedback = true;
+    const isCorrect = this.quiz.correctIndex === index;
+    console.log('Answer is:', isCorrect ? 'correct' : 'incorrect');
 
     if (this.isTimed) {
-      const adjustment = ((100 - this.delta) / 8) * (this.isCorrect ? 1 : -1);
+      const adjustment = ((100 - this.delta) / 8) * (isCorrect ? 1 : -1);
       this.delta += adjustment;
       if (this.delta < 0) this.delta = 0;
     }
 
     // Small delay before showing next question
     setTimeout(() => {
+      this.selectedAnswerIndex = null;
+      this.showFeedback = false;
       this.createQuiz();
-    }, this.isCorrect ? 100 : 500);
+    }, isCorrect ? 300 : 800);
   }
 
   private createQuiz(): void {
@@ -184,5 +190,20 @@ export class TabPlayPage implements OnInit, OnDestroy {
     if (this.delta >= 50) return 'warning';
     if (this.delta >= 30) return 'primary';
     return 'medium';
+  }
+
+  getButtonColor(index: number): string {
+    if (!this.showFeedback) {
+      return 'primary';
+    }
+    
+    // Show feedback after user clicked
+    if (this.quiz && index === this.quiz.correctIndex) {
+      return 'success';
+    }
+    if (index === this.selectedAnswerIndex) {
+      return 'danger';
+    }
+    return 'primary';
   }
 }

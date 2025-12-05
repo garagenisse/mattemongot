@@ -17,7 +17,7 @@ Mattemongot is an educational app designed to help children and adults practice 
 ## Technology Stack
 
 - **Framework**: Ionic 8
-- **Frontend**: Angular 18
+- **Frontend**: Angular 19
 - **Mobile**: Capacitor 6
 - **Language**: TypeScript
 - **Styling**: SCSS

@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Mattemongot: Practice multiplication tables - A modern Ionic Angular app",
   "author": "garagenisse",
-  "homepage": "https://github.com/andreas-tietoevry/surfalert",
+  "homepage": "https://github.com/garagenisse/mattemongot",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

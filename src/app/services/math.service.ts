@@ -31,11 +31,25 @@ export class MathService {
     const correctAnswer = r * timesTable;
     const answers: number[] = [correctAnswer];
 
-    // Generate two incorrect answers
-    while (answers.length <= 2) {
+    // Generate two incorrect answers with a safety counter to prevent infinite loops
+    let safetyCounter = 0;
+    const maxAttempts = 100;
+    
+    while (answers.length < 3 && safetyCounter < maxAttempts) {
+      safetyCounter++;
       const wrongAnswer = Math.round(Math.random() * 10) * timesTable;
       if (!answers.includes(wrongAnswer)) {
         answers.push(wrongAnswer);
+      }
+    }
+    
+    // If we couldn't generate enough unique answers, fill with simple alternatives
+    while (answers.length < 3) {
+      const fallbackAnswer = correctAnswer + (answers.length * timesTable);
+      if (!answers.includes(fallbackAnswer)) {
+        answers.push(fallbackAnswer);
+      } else {
+        answers.push(correctAnswer + answers.length + 1);
       }
     }
 
