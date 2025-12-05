@@ -1,0 +1,30 @@
+.level-card {
+  text-align: center;
+  
+  ion-card-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--ion-color-primary);
+  }
+  
+  .level-name {
+    font-size: 0.9rem;
+    color: var(--ion-color-medium);
+    margin-bottom: 10px;
+  }
+  
+  .stars-container {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    
+    .star {
+      font-size: 20px;
+      color: var(--ion-color-medium-tint);
+      
+      &.filled {
+        color: #ffc107;
+      }
+    }
+  }
+}

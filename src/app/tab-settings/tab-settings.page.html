@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>{{ 'settings.title' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar color="primary">
+      <ion-title size="large">{{ 'settings.title' | translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>{{ 'settings.timed' | translate }}</ion-label>
+      <ion-toggle 
+        slot="end" 
+        [checked]="userSettings?.timed"
+        (ionChange)="onTimedChange($event)">
+      </ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>{{ 'settings.version' | translate }}</ion-label>
+      <ion-label slot="end" class="version-label">{{ version }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div class="reset-section">
+    <ion-button 
+      expand="block" 
+      color="danger" 
+      (click)="showConfirm()">
+      {{ 'settings.reset' | translate }}
+    </ion-button>
+  </div>
+</ion-content>

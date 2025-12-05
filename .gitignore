@@ -1,15 +1,35 @@
-# Virtual environment
-.venv/
+# Dependencies
+node_modules/
 
-# Python cache
-__pycache__/
-*.pyc
-*.pyo
+# Platforms
+platforms/
+plugins/
 
-# Miljövariabler
-surf.env
+# Build output
+www/
+dist/
+out-tsc/
 
-# IDE/OS
+# Capacitor
+android/
+ios/
+
+# IDE
+.idea/
 .vscode/
 *.swp
+*.swo
+.vs/
+*.suo
+
+# OS
 .DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+
+# Misc
+*.log
+npm-debug.log*
+.angular/

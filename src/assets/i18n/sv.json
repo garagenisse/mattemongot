@@ -1,0 +1,46 @@
+{
+  "tabs": {
+    "levels": "Nivåer",
+    "play": "Spela",
+    "settings": "Inställningar"
+  },
+  "dashboard": {
+    "title": "Mattemongot"
+  },
+  "settings": {
+    "title": "Inställningar",
+    "timed": "Tidtagning",
+    "version": "Version",
+    "reset": "Återställ"
+  },
+  "reset_panel": {
+    "title": "Bekräfta återställning",
+    "message": "Är du säker på att du vill börja om? Detta kan inte ångras."
+  },
+  "buttons": {
+    "cancel": "Avbryt",
+    "ok": "OK"
+  },
+  "levels": {
+    "1_table": "1:ans tabell",
+    "2_table": "2:ans tabell",
+    "3_table": "3:ans tabell",
+    "4_table": "4:ans tabell",
+    "5_table": "5:ans tabell",
+    "6_table": "6:ans tabell",
+    "7_table": "7:ans tabell",
+    "8_table": "8:ans tabell",
+    "9_table": "9:ans tabell",
+    "10_table": "10:ans tabell",
+    "11_table": "11:ans tabell",
+    "12_table": "12:ans tabell",
+    "13_table": "13:ans tabell",
+    "14_table": "14:ans tabell",
+    "15_table": "15:ans tabell",
+    "16_table": "16:ans tabell",
+    "17_table": "17:ans tabell",
+    "18_table": "18:ans tabell",
+    "19_table": "19:ans tabell",
+    "20_table": "20:ans tabell"
+  }
+}

@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab-dash"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ levelDesc }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="quiz-container">
+    @if (isTimed) {
+      <div class="progress-bar-container">
+        <ion-progress-bar [value]="delta / 100" [color]="getProgressColor()"></ion-progress-bar>
+        <div class="progress-label">
+          @if (delta >= 70) {
+            <span class="medal gold">⭐⭐⭐</span>
+          } @else if (delta >= 50) {
+            <span class="medal silver">⭐⭐</span>
+          } @else if (delta >= 30) {
+            <span class="medal bronze">⭐</span>
+          }
+        </div>
+      </div>
+    }
+
+    <div class="quiz-question">
+      {{ quiz?.quizDisplay }} = ?
+    </div>
+
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        @for (answer of quiz?.answers; track $index; let i = $index) {
+          <ion-col size="10" size-md="6">
+            <ion-button 
+              class="answer-button" 
+              expand="block"
+              (click)="onClickAnswer(i)"
+              [color]="isCorrect ? 'primary' : (quiz?.correctIndex === i ? 'success' : 'danger')">
+              {{ answer }}
+            </ion-button>
+          </ion-col>
+        }
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

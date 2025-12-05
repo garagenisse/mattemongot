@@ -1,0 +1,46 @@
+{
+  "tabs": {
+    "levels": "Levels",
+    "play": "Play",
+    "settings": "Settings"
+  },
+  "dashboard": {
+    "title": "Mattemongot"
+  },
+  "settings": {
+    "title": "Settings",
+    "timed": "Timed Mode",
+    "version": "Version",
+    "reset": "Reset Progress"
+  },
+  "reset_panel": {
+    "title": "Confirm Reset",
+    "message": "Are you sure you want to reset all your progress? This cannot be undone."
+  },
+  "buttons": {
+    "cancel": "Cancel",
+    "ok": "OK"
+  },
+  "levels": {
+    "1_table": "1st Table",
+    "2_table": "2nd Table",
+    "3_table": "3rd Table",
+    "4_table": "4th Table",
+    "5_table": "5th Table",
+    "6_table": "6th Table",
+    "7_table": "7th Table",
+    "8_table": "8th Table",
+    "9_table": "9th Table",
+    "10_table": "10th Table",
+    "11_table": "11th Table",
+    "12_table": "12th Table",
+    "13_table": "13th Table",
+    "14_table": "14th Table",
+    "15_table": "15th Table",
+    "16_table": "16th Table",
+    "17_table": "17th Table",
+    "18_table": "18th Table",
+    "19_table": "19th Table",
+    "20_table": "20th Table"
+  }
+}

@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>{{ 'dashboard.title' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar color="primary">
+      <ion-title size="large">{{ 'dashboard.title' | translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row>
+      @for (level of settings?.levels; track level.level; let i = $index) {
+        <ion-col size="6" size-md="4" size-lg="3">
+          <ion-card class="level-card" (click)="selectLevel(i)" button>
+            <ion-card-header>
+              <ion-card-title>{{ level.level }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <div class="level-name">{{ translateLevel(level.label) }}</div>
+              <div class="stars-container">
+                @for (starNum of getStarArray(); track starNum) {
+                  <ion-icon 
+                    [name]="starNum <= getStars(i) ? 'star' : 'star-outline'" 
+                    [class.filled]="starNum <= getStars(i)"
+                    class="star">
+                  </ion-icon>
+                }
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,86 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/* Mattemongot custom styles */
+.quiz-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.quiz-question {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 20px 0;
+  color: var(--ion-color-primary);
+}
+
+.answer-button {
+  --background: var(--ion-color-primary);
+  --color: white;
+  font-size: 1.5rem;
+  height: 60px;
+  margin: 10px;
+}
+
+.answer-button.correct {
+  --background: var(--ion-color-success);
+}
+
+.answer-button.incorrect {
+  --background: var(--ion-color-danger);
+}
+
+.progress-bar-container {
+  padding: 10px 20px;
+}
+
+.level-card {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.level-card:hover {
+  transform: scale(1.02);
+}
+
+.stars-container {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.star {
+  font-size: 24px;
+}
+
+.star.filled {
+  color: #ffc107;
+}
+
+.star.empty {
+  color: #e0e0e0;
+}
