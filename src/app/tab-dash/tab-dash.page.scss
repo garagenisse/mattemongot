@@ -16,7 +16,9 @@
   .medals-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 8px;
+    min-height: 40px;
     
     .medal {
       font-size: 32px;
