@@ -13,17 +13,25 @@
     margin-bottom: 10px;
   }
   
-  .stars-container {
+  .medals-container {
     display: flex;
     justify-content: center;
-    gap: 5px;
+    margin-top: 8px;
     
-    .star {
-      font-size: 20px;
+    .medal {
+      font-size: 32px;
       color: var(--ion-color-medium-tint);
       
-      &.filled {
-        color: #ffc107;
+      &.bronze {
+        color: #cd7f32;
+      }
+      
+      &.silver {
+        color: #c0c0c0;
+      }
+      
+      &.gold {
+        color: #ffd700;
       }
     }
   }

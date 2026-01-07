@@ -17,7 +17,7 @@ import {
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { addIcons } from 'ionicons';
-import { star, starOutline } from 'ionicons/icons';
+import { medal, medalOutline } from 'ionicons/icons';
 import { SettingsService, Settings, UserSettings } from '../services/settings.service';
 
 @Component({
@@ -51,7 +51,7 @@ export class TabDashPage implements OnInit {
     private settingsService: SettingsService,
     private translate: TranslateService
   ) {
-    addIcons({ star, starOutline });
+    addIcons({ medal, medalOutline });
   }
 
   async ngOnInit(): Promise<void> {
@@ -64,7 +64,8 @@ export class TabDashPage implements OnInit {
 
   private async loadSettings(): Promise<void> {
     this.settings = await this.settingsService.loadSettings();
-    this.userSettings = await this.settingsService.loadUserSettings();
+    // Force reload from storage to get latest stars
+    this.userSettings = await this.settingsService.loadUserSettings(true);
   }
 
   selectLevel(levelIndex: number): void {
@@ -79,7 +80,15 @@ export class TabDashPage implements OnInit {
     return this.userSettings?.levels[levelIndex]?.stars || 0;
   }
 
-  getStarArray(): number[] {
-    return [1, 2, 3];
+  getMedalColor(levelIndex: number): string {
+    const stars = this.getStars(levelIndex);
+    if (stars >= 3) return 'gold';
+    if (stars >= 2) return 'silver';
+    if (stars >= 1) return 'bronze';
+    return 'none';
+  }
+
+  hasMedal(levelIndex: number): boolean {
+    return this.getStars(levelIndex) > 0;
   }
 }

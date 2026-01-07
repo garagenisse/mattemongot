@@ -1,7 +1,7 @@
 # Dependencies
 node_modules/
 
-# Platforms
+# Platforms (old Cordova)
 platforms/
 plugins/
 
@@ -10,9 +10,21 @@ www/
 dist/
 out-tsc/
 
-# Capacitor
-android/
-ios/
+# Capacitor - Android
+android/app/build/
+android/app/src/main/assets/
+android/.gradle/
+android/.idea/
+android/local.properties
+android/captures/
+android/keystore.properties
+*.keystore
+
+# Capacitor - iOS
+ios/App/build/
+ios/App/Pods/
+ios/App/public/
+ios/.idea/
 
 # IDE
 .idea/

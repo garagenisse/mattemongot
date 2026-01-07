@@ -48,6 +48,7 @@ export class TabPlayPage implements OnInit, OnDestroy {
   isTimed = true;
   selectedAnswerIndex: number | null = null;
   showFeedback = false;
+  bestMedalEarned = 0; // Track best medal in current session (0=none, 1=bronze, 2=silver, 3=gold)
   private levelIndex = 0;
   private timerInterval: ReturnType<typeof setInterval> | null = null;
   private lastClick = 0;
@@ -86,7 +87,9 @@ export class TabPlayPage implements OnInit, OnDestroy {
     const userSettings = await this.settingsService.loadUserSettings();
     
     this.level = settings.levels[this.levelIndex] || settings.levels[0];
-    this.userLevel = userSettings.levels[this.levelIndex] || userSettings.levels[0];
+    // Create a copy to avoid reference issues
+    const levelData = userSettings.levels[this.levelIndex] || userSettings.levels[0];
+    this.userLevel = { ...levelData };
     this.isTimed = userSettings.timed;
     this.levelDesc = this.translate.instant('levels.' + this.level.label);
   }
@@ -94,6 +97,7 @@ export class TabPlayPage implements OnInit, OnDestroy {
   private init(): void {
     this.createQuiz();
     this.delta = 0;
+    this.bestMedalEarned = this.userLevel?.stars || 0; // Start with already earned stars
     this.selectedAnswerIndex = null;
     this.showFeedback = false;
   }
@@ -120,6 +124,15 @@ export class TabPlayPage implements OnInit, OnDestroy {
       if (this.delta < 0) this.delta = 0;
     }
 
+    // Update best medal based on current delta
+    if (this.delta >= 70 && this.bestMedalEarned < 3) {
+      this.bestMedalEarned = 3;
+    } else if (this.delta >= 50 && this.bestMedalEarned < 2) {
+      this.bestMedalEarned = 2;
+    } else if (this.delta >= 30 && this.bestMedalEarned < 1) {
+      this.bestMedalEarned = 1;
+    }
+
     // Check stats and award stars
     this.checkAndAwardStars();
     console.log('Timer... delta:', this.delta);
@@ -142,8 +155,8 @@ export class TabPlayPage implements OnInit, OnDestroy {
     }
 
     if (newStars > this.userLevel.stars) {
-      this.userLevel.stars = newStars;
       await this.settingsService.updateLevelStars(this.levelIndex, newStars);
+      this.userLevel.stars = newStars;
     }
   }
 

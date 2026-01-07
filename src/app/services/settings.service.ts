@@ -25,8 +25,8 @@ export interface UserSettings {
 }
 
 const CURRENT_VERSION = '2.0.0';
-const SETTINGS_KEY = 'mattemongot_settings';
-const USER_SETTINGS_KEY = 'mattemongot_user_settings';
+const SETTINGS_KEY = 'mattemix_settings';
+const USER_SETTINGS_KEY = 'mattemix_user_settings';
 
 @Injectable({
   providedIn: 'root'
@@ -96,17 +96,20 @@ export class SettingsService {
   /**
    * Load user settings from storage
    */
-  async loadUserSettings(): Promise<UserSettings> {
-    try {
-      const { value } = await Preferences.get({ key: USER_SETTINGS_KEY });
-      if (value) {
-        this.userSettings = JSON.parse(value);
-      } else {
+  async loadUserSettings(forceReload: boolean = false): Promise<UserSettings> {
+    // Always reload from storage if forceReload is true, or if not cached
+    if (forceReload || !this.userSettings) {
+      try {
+        const { value } = await Preferences.get({ key: USER_SETTINGS_KEY });
+        if (value) {
+          this.userSettings = JSON.parse(value);
+        } else {
+          this.userSettings = this.getDefaultUserSettings();
+          await this.saveUserSettings();
+        }
+      } catch {
         this.userSettings = this.getDefaultUserSettings();
-        await this.saveUserSettings();
       }
-    } catch {
-      this.userSettings = this.getDefaultUserSettings();
     }
     return this.userSettings!;
   }

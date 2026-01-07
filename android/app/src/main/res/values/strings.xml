@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">MatteMix</string>
+    <string name="title_activity_main">MatteMix</string>
+    <string name="package_name">se.garagenisse.mattemix</string>
+    <string name="custom_url_scheme">se.garagenisse.mattemix</string>
+</resources>

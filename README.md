@@ -1,10 +1,10 @@
-"# Mattemongot
+"# MatteMix
 
 **Practice multiplication tables!** A fun math game for learning times tables 1-20.
 
 ## Description
 
-Mattemongot is an educational app designed to help children and adults practice multiplication tables. Originally created by garagenisse, this version has been upgraded to modern Ionic 8 with Angular and Capacitor.
+MatteMix is an educational app designed to help children and adults practice multiplication tables. Originally created by garagenisse, this version has been upgraded to modern Ionic 8 with Angular and Capacitor.
 
 ## Features
 

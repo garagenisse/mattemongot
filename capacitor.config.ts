@@ -1,9 +1,9 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'se.garagenisse.mattemongot',
-  appName: 'Mattemongot',
-  webDir: 'www',
+  appId: 'se.garagenisse.mattemix',
+  appName: 'MatteMix',
+  webDir: 'www/browser',
   server: {
     androidScheme: 'https'
   },

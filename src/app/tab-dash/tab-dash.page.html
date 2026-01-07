@@ -21,12 +21,14 @@
             </ion-card-header>
             <ion-card-content>
               <div class="level-name">{{ translateLevel(level.label) }}</div>
-              <div class="stars-container">
-                @for (starNum of getStarArray(); track starNum) {
+              <div class="medals-container">
+                @if (hasMedal(i)) {
                   <ion-icon 
-                    [name]="starNum <= getStars(i) ? 'star' : 'star-outline'" 
-                    [class.filled]="starNum <= getStars(i)"
-                    class="star">
+                    [name]="'medal'" 
+                    [class.bronze]="getMedalColor(i) === 'bronze'"
+                    [class.silver]="getMedalColor(i) === 'silver'"
+                    [class.gold]="getMedalColor(i) === 'gold'"
+                    class="medal">
                   </ion-icon>
                 }
               </div>

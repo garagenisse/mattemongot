@@ -1,9 +1,9 @@
 {
-  "name": "mattemongot",
+  "name": "mattemix",
   "version": "2.0.0",
-  "description": "Mattemongot: Practice multiplication tables - A modern Ionic Angular app",
+  "description": "MatteMix: Practice multiplication tables - A modern Ionic Angular app",
   "author": "garagenisse",
-  "homepage": "https://github.com/garagenisse/mattemongot",
+  "homepage": "https://github.com/garagenisse/mattemix",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
