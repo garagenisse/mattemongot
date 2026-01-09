@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MatteMix App Icon Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        canvas {
+            border: 2px solid #333;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            background: white;
+        }
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>MatteMix App Icon</h1>
+    <canvas id="iconCanvas" width="512" height="512"></canvas>
+    <div class="controls">
+        <button onclick="generateIcon()">Regenerera</button>
+        <button onclick="downloadIcon()">Ladda ner (512x512)</button>
+        <button onclick="downloadAllSizes()">Ladda ner alla storlekar</button>
+    </div>
+    <div id="status" style="margin-top: 10px; color: #666;"></div>
+
+    <script>
+        const canvas = document.getElementById('iconCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function generateIcon() {
+            // Gradient background
+            const gradient = ctx.createLinearGradient(0, 0, 512, 512);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            
+            // Draw rounded rectangle background
+            ctx.fillStyle = gradient;
+            roundRect(ctx, 0, 0, 512, 512, 80);
+            ctx.fill();
+
+            // Draw multiplication symbol (×)
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+            ctx.font = 'bold 400px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('×', 256, 280);
+
+            // Draw main text "123"
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 140px Arial';
+            ctx.fillText('123', 256, 200);
+
+            // Draw multiplication sign
+            ctx.font = 'bold 100px Arial';
+            ctx.fillText('×', 256, 300);
+
+            // Draw equals and result
+            ctx.font = 'bold 80px Arial';
+            ctx.fillText('= ?', 256, 390);
+
+            // Add subtle shine effect
+            const shineGradient = ctx.createLinearGradient(0, 0, 0, 256);
+            shineGradient.addColorStop(0, 'rgba(255, 255, 255, 0.3)');
+            shineGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            ctx.fillStyle = shineGradient;
+            roundRect(ctx, 0, 0, 512, 256, 80);
+            ctx.fill();
+        }
+
+        function roundRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+        }
+
+        function downloadIcon() {
+            const link = document.createElement('a');
+            link.download = 'mattemix-icon-512.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        function downloadAllSizes() {
+            const sizes = [
+                { size: 192, name: 'ic_launcher.png', folder: 'mipmap-xxxhdpi' },
+                { size: 144, name: 'ic_launcher.png', folder: 'mipmap-xxhdpi' },
+                { size: 96, name: 'ic_launcher.png', folder: 'mipmap-xhdpi' },
+                { size: 72, name: 'ic_launcher.png', folder: 'mipmap-hdpi' },
+                { size: 48, name: 'ic_launcher.png', folder: 'mipmap-mdpi' },
+            ];
+
+            const status = document.getElementById('status');
+            status.textContent = 'Genererar ikoner...';
+
+            sizes.forEach((config, index) => {
+                setTimeout(() => {
+                    const tempCanvas = document.createElement('canvas');
+                    tempCanvas.width = config.size;
+                    tempCanvas.height = config.size;
+                    const tempCtx = tempCanvas.getContext('2d');
+
+                    // Draw scaled version
+                    drawIcon(tempCtx, config.size);
+
+                    const link = document.createElement('a');
+                    link.download = `${config.folder}-${config.name}`;
+                    link.href = tempCanvas.toDataURL('image/png');
+                    link.click();
+
+                    if (index === sizes.length - 1) {
+                        status.textContent = 'Alla ikoner nedladdade! Ersätt filerna i android/app/src/main/res/mipmap-*/';
+                    }
+                }, index * 200);
+            });
+        }
+
+        function drawIcon(ctx, size) {
+            const scale = size / 512;
+            ctx.scale(scale, scale);
+
+            // Gradient background
+            const gradient = ctx.createLinearGradient(0, 0, 512, 512);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            
+            // Draw rounded rectangle background
+            ctx.fillStyle = gradient;
+            roundRect(ctx, 0, 0, 512, 512, 80);
+            ctx.fill();
+
+            // Draw multiplication symbol (×)
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+            ctx.font = 'bold 400px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('×', 256, 280);
+
+            // Draw main text "123"
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 140px Arial';
+            ctx.fillText('123', 256, 200);
+
+            // Draw multiplication sign
+            ctx.font = 'bold 100px Arial';
+            ctx.fillText('×', 256, 300);
+
+            // Draw equals and result
+            ctx.font = 'bold 80px Arial';
+            ctx.fillText('= ?', 256, 390);
+
+            // Add subtle shine effect
+            const shineGradient = ctx.createLinearGradient(0, 0, 0, 256);
+            shineGradient.addColorStop(0, 'rgba(255, 255, 255, 0.3)');
+            shineGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            ctx.fillStyle = shineGradient;
+            roundRect(ctx, 0, 0, 512, 256, 80);
+            ctx.fill();
+
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+        }
+
+        function generateIcon() {
+            ctx.clearRect(0, 0, 512, 512);
+            drawIcon(ctx, 512);
+        }
+
+        // Generate icon on load
+        generateIcon();
+    </script>
+</body>
+</html>
