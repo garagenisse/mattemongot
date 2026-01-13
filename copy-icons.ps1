@@ -7,10 +7,20 @@ param(
 
 $iconMappings = @{
     "mipmap-xxxhdpi-ic_launcher.png" = "android\app\src\main\res\mipmap-xxxhdpi\ic_launcher.png"
+    "mipmap-xxxhdpi-ic_launcher_round.png" = "android\app\src\main\res\mipmap-xxxhdpi\ic_launcher_round.png"
+    "mipmap-xxxhdpi-ic_launcher_foreground.png" = "android\app\src\main\res\mipmap-xxxhdpi\ic_launcher_foreground.png"
     "mipmap-xxhdpi-ic_launcher.png" = "android\app\src\main\res\mipmap-xxhdpi\ic_launcher.png"
+    "mipmap-xxhdpi-ic_launcher_round.png" = "android\app\src\main\res\mipmap-xxhdpi\ic_launcher_round.png"
+    "mipmap-xxhdpi-ic_launcher_foreground.png" = "android\app\src\main\res\mipmap-xxhdpi\ic_launcher_foreground.png"
     "mipmap-xhdpi-ic_launcher.png" = "android\app\src\main\res\mipmap-xhdpi\ic_launcher.png"
+    "mipmap-xhdpi-ic_launcher_round.png" = "android\app\src\main\res\mipmap-xhdpi\ic_launcher_round.png"
+    "mipmap-xhdpi-ic_launcher_foreground.png" = "android\app\src\main\res\mipmap-xhdpi\ic_launcher_foreground.png"
     "mipmap-hdpi-ic_launcher.png" = "android\app\src\main\res\mipmap-hdpi\ic_launcher.png"
+    "mipmap-hdpi-ic_launcher_round.png" = "android\app\src\main\res\mipmap-hdpi\ic_launcher_round.png"
+    "mipmap-hdpi-ic_launcher_foreground.png" = "android\app\src\main\res\mipmap-hdpi\ic_launcher_foreground.png"
     "mipmap-mdpi-ic_launcher.png" = "android\app\src\main\res\mipmap-mdpi\ic_launcher.png"
+    "mipmap-mdpi-ic_launcher_round.png" = "android\app\src\main\res\mipmap-mdpi\ic_launcher_round.png"
+    "mipmap-mdpi-ic_launcher_foreground.png" = "android\app\src\main\res\mipmap-mdpi\ic_launcher_foreground.png"
 }
 
 Write-Host "Kopierar ikoner från $DownloadsPath..." -ForegroundColor Cyan

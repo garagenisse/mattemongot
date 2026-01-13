@@ -117,35 +117,41 @@
 
         function downloadAllSizes() {
             const sizes = [
-                { size: 192, name: 'ic_launcher.png', folder: 'mipmap-xxxhdpi' },
-                { size: 144, name: 'ic_launcher.png', folder: 'mipmap-xxhdpi' },
-                { size: 96, name: 'ic_launcher.png', folder: 'mipmap-xhdpi' },
-                { size: 72, name: 'ic_launcher.png', folder: 'mipmap-hdpi' },
-                { size: 48, name: 'ic_launcher.png', folder: 'mipmap-mdpi' },
+                { size: 192, names: ['ic_launcher.png', 'ic_launcher_round.png', 'ic_launcher_foreground.png'], folder: 'mipmap-xxxhdpi' },
+                { size: 144, names: ['ic_launcher.png', 'ic_launcher_round.png', 'ic_launcher_foreground.png'], folder: 'mipmap-xxhdpi' },
+                { size: 96, names: ['ic_launcher.png', 'ic_launcher_round.png', 'ic_launcher_foreground.png'], folder: 'mipmap-xhdpi' },
+                { size: 72, names: ['ic_launcher.png', 'ic_launcher_round.png', 'ic_launcher_foreground.png'], folder: 'mipmap-hdpi' },
+                { size: 48, names: ['ic_launcher.png', 'ic_launcher_round.png', 'ic_launcher_foreground.png'], folder: 'mipmap-mdpi' },
             ];
 
             const status = document.getElementById('status');
             status.textContent = 'Genererar ikoner...';
 
+            let downloadCount = 0;
+            const totalFiles = sizes.reduce((sum, config) => sum + config.names.length, 0);
+
             sizes.forEach((config, index) => {
-                setTimeout(() => {
-                    const tempCanvas = document.createElement('canvas');
-                    tempCanvas.width = config.size;
-                    tempCanvas.height = config.size;
-                    const tempCtx = tempCanvas.getContext('2d');
+                config.names.forEach((name, nameIndex) => {
+                    setTimeout(() => {
+                        const tempCanvas = document.createElement('canvas');
+                        tempCanvas.width = config.size;
+                        tempCanvas.height = config.size;
+                        const tempCtx = tempCanvas.getContext('2d');
 
-                    // Draw scaled version
-                    drawIcon(tempCtx, config.size);
+                        // Draw scaled version
+                        drawIcon(tempCtx, config.size);
 
-                    const link = document.createElement('a');
-                    link.download = `${config.folder}-${config.name}`;
-                    link.href = tempCanvas.toDataURL('image/png');
-                    link.click();
+                        const link = document.createElement('a');
+                        link.download = `${config.folder}-${name}`;
+                        link.href = tempCanvas.toDataURL('image/png');
+                        link.click();
 
-                    if (index === sizes.length - 1) {
-                        status.textContent = 'Alla ikoner nedladdade! Ersätt filerna i android/app/src/main/res/mipmap-*/';
-                    }
-                }, index * 200);
+                        downloadCount++;
+                        if (downloadCount === totalFiles) {
+                            status.textContent = 'Alla ikoner nedladdade! Ersätt filerna i android/app/src/main/res/mipmap-*/';
+                        }
+                    }, (index * config.names.length + nameIndex) * 200);
+                });
             });
         }
 
